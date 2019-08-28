@@ -12,10 +12,12 @@ def ordenar(lista):
 def manhattan(amostra, treino):
     distancias=[]
     for i in range(0,105):
-        distancia=abs(amostra[0]-treino[i][0])+abs(amostra[1]-treino[i][1])+abs(amostra[2]-treino[i][2])+\
+        distancia=abs(amostra[0]-treino[i][0])+\
+                  abs(amostra[1]-treino[i][1])+\
+                  abs(amostra[2]-treino[i][2])+\
                   abs(amostra[3]-treino[i][3])
 
-        distancia=float("{:.2f}".format(distancia))
+        #distancia=float("{:.2f}".format(distancia))
         distancias.append([distancia,treino[i][4]])
 
     distancias=ordenar(distancias)
@@ -29,7 +31,7 @@ def euclidiana(amostra, treino):
                   ((abs(amostra[2]-treino[i][2]))**2)+\
                   ((abs(amostra[3]-treino[i][3]))**2)
         distancia=math.sqrt(distancia)
-        distancia = float("{:.2f}".format(distancia))
+        #distancia = float("{:.2f}".format(distancia))
         distancias.append([distancia, treino[i][4]])
 
     distancias=ordenar(distancias)

@@ -9,7 +9,6 @@ def replace_label(classe):
     elif 'Iris-virginica' in classe:
         return 2
 
-
 # Abre o arquivo
 file = open("iris.data")
 
@@ -30,39 +29,41 @@ for linha in linhas:
     matriz.append(vetor)
 
 # Imprime a matriz completa
-# print(matriz)
+#print(matriz)
 # Imprime o tamanho da matriz
-# print(len(matriz))
+#print(len(matriz))
 # imprime a primeira linha da matriz
-# print(matriz[0])
+#print(matriz[0])
 # imprime a classe da amostra
-# print(matriz[0][4])
+#print(matriz[0][4])
 
 # preencher matriz treino
 treino = []
-for i in range(0, 35):
+for i in range(15, 50):
     treino.append(matriz[i])
 
-for i in range(50, 85):
+for i in range(65, 100):
     treino.append(matriz[i])
 
-for i in range(100, 135):
+for i in range(115, 150):
     treino.append(matriz[i])
+#print(treino)
+#print(treino.__len__())
 
 # preecher matriz teste
 teste = []
-for i in range(35, 50):
+for i in range(0, 15):
     teste.append(matriz[i])
 
-for i in range(85, 100):
+for i in range(50, 65):
     teste.append(matriz[i])
 
-for i in range(135, 150):
+for i in range(100, 115):
     teste.append(matriz[i])
 
 # valor de K
-# k=int(input("Informe o K: "))
-k = 21
+k=int(input("Informe o K: "))
+#k = 21
 
 calcManhattan = []
 calcEuclidiana = []
@@ -88,18 +89,19 @@ for i in range(0, 45):
 
     # classificar cada amostra
     classManhattan.append([str(i + 1) + ' amostra ' + str(teste[i])
-                          + ' Voto: ', str(Classificar.classificar(vizinhosManhattan[i]))])
+                           + ' Voto: ', str(Classificar.classificar(vizinhosManhattan[i]))])
     classEuclidiana.append([str(i + 1) + ' amostra ' + str(teste[i])
-                           + ' Voto: ', str(Classificar.classificar(vizinhosEuclidiana[i]))])
+                            + ' Voto: ', str(Classificar.classificar(vizinhosEuclidiana[i]))])
 
-print(classManhattan)
-print(classEuclidiana)
+print("\nPara k de valor = "+str(k)+"\nClassificação Manhattan: "+str(classManhattan))
+print("\nClassificação Euclidiana: "+str(classEuclidiana))
 
-matrizManhattan=MatrizConfusao.preencherMatriz(teste, classManhattan)
-matrizEuclidiana=MatrizConfusao.preencherMatriz(teste, classEuclidiana)
+matrizManhattan= MatrizConfusao.preencherMatriz(teste, classManhattan)
+matrizEuclidiana= MatrizConfusao.preencherMatriz(teste, classEuclidiana)
 
 #mostrar matrizes e taxas de acerto
-print('Matriz de confusão - Manhattan')
+
+print('\nMatriz de confusão - Manhattan')
 print(matrizManhattan[0])
 print(matrizManhattan[1])
 print(matrizManhattan[2])
@@ -112,4 +114,5 @@ print(matrizEuclidiana[1])
 print(matrizEuclidiana[2])
 taxaAcerto = ((matrizEuclidiana[0][0]+matrizEuclidiana[1][1]+matrizEuclidiana[2][2])/teste.__len__())*100
 print('\nTaxa de acerto = '+str(float("{:.2f}".format(taxaAcerto)))+' %')
+
 
