@@ -1,4 +1,5 @@
 import Calculos, Classificar, MatrizConfusao
+import pandas as pd
 
 # Muda o rótulo de uma classe para inteiro
 def replace_label(classe):
@@ -93,26 +94,32 @@ for i in range(0, 45):
     classEuclidiana.append([str(i + 1) + ' amostra ' + str(teste[i])
                             + ' Voto: ', str(Classificar.classificar(vizinhosEuclidiana[i]))])
 
-print("\nPara k de valor = "+str(k)+"\nClassificação Manhattan: "+str(classManhattan))
+print("\nClassificação Manhattan: "+str(classManhattan))
 print("\nClassificação Euclidiana: "+str(classEuclidiana))
+
 
 matrizManhattan= MatrizConfusao.preencherMatriz(teste, classManhattan)
 matrizEuclidiana= MatrizConfusao.preencherMatriz(teste, classEuclidiana)
 
+taxaAcerto = ((matrizManhattan[0][0]+matrizManhattan[1][1]+matrizManhattan[2][2])/teste.__len__())*100
+
+#coisas novas PANDAS Series
+indices=['Setosa','Versicolor','Virginica']
+matrizManhattan = pd.DataFrame(matrizManhattan, index=indices, columns=indices)
+
+
 #mostrar matrizes e taxas de acerto
 
-print('\nMatriz de confusão - Manhattan')
-print(matrizManhattan[0])
-print(matrizManhattan[1])
-print(matrizManhattan[2])
-taxaAcerto = ((matrizManhattan[0][0]+matrizManhattan[1][1]+matrizManhattan[2][2])/teste.__len__())*100
+print('\n------------------------------------------\n\nMatriz de confusão - Manhattan\n')
+print(matrizManhattan)
 print('\nTaxa de acerto = '+str(float("{:.2f}".format(taxaAcerto)))+' %')
 
-print("\nMatriz de confusão - Euclidiana")
-print(matrizEuclidiana[0])
-print(matrizEuclidiana[1])
-print(matrizEuclidiana[2])
+
 taxaAcerto = ((matrizEuclidiana[0][0]+matrizEuclidiana[1][1]+matrizEuclidiana[2][2])/teste.__len__())*100
+matrizEuclidiana = pd.DataFrame(matrizEuclidiana, index=indices, columns=indices)
+print("\n------------------------------------------\nMatriz de confusão - Euclidiana\n")
+print(matrizEuclidiana)
+
 print('\nTaxa de acerto = '+str(float("{:.2f}".format(taxaAcerto)))+' %')
 
 
